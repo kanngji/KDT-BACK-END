@@ -5,5 +5,5 @@
 // console.log(ani);
 // show();
 
-import { names, showNames } from './human';
-showNames();
+// import { names, showNames } from './human';
+// showNames();
