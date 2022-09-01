@@ -1,20 +1,28 @@
 // @ts-check
 
+/**
+ * @typedef Post
+ * @property {number} id
+ * @property {string} title
+ * @property {string} content
+ */
+
+/** @type {Post[]} */
 const posts = [
   {
     id: 1,
     title: '첫번째 블로그 글',
-    content: '첫번째 내용입니다',
+    content: '첫번째 내용입니다.',
   },
   {
     id: 2,
-    title: '두번째 블로그글',
-    content: '두번째 내용입니다.',
+    title: '두번째 블로그 글',
+    content: '두번째 내용입니다',
   },
   {
     id: 3,
     title: '세번째 블로그 글',
-    content: '세번째 내용입니다.',
+    content: '세번째 내용',
   },
 ];
 
@@ -35,6 +43,7 @@ const routes = [
       },
     }),
   },
+
   // 특정 ID의 블로그 글을 가져오는 API
   {
     url: '/posts',
@@ -45,15 +54,16 @@ const routes = [
       if (!id) {
         return {
           statusCode: 404,
-          body: 'Not Found',
+          body: 'Not found',
         };
       }
 
       const result = posts.find((post) => post.id === id);
+
       if (!result) {
         return {
           statusCode: 404,
-          body: 'ID Not Found',
+          body: 'ID Not found',
         };
       }
 
@@ -64,9 +74,9 @@ const routes = [
     },
   },
 
-  //새로운 글을 쓰는 API
+  // 새로운 글을 쓰는 API
   {
-    url: '/post',
+    url: '/posts',
     method: 'POST',
     id: 'undefined',
     callback: async (id, newPost) => {
@@ -81,26 +91,29 @@ const routes = [
       };
     },
   },
-  //수정 하기 API
+
+  // 수정하는 API
   {
-    url: '/post',
+    url: '/posts',
     method: 'PUT',
     id: 'number',
     callback: async (id, newPost) => {
       if (!id) {
         return {
           statusCode: 404,
-          body: 'NOT found',
+          body: 'Not found',
         };
       }
+
       const result = posts.find((post) => post.id === id);
 
       if (!result) {
         return {
           statusCode: 404,
-          body: 'Not Found',
+          body: 'Not found',
         };
       }
+
       const modifyPost = newPost;
       modifyPost.id = id;
       posts[id - 1] = modifyPost;
@@ -110,24 +123,26 @@ const routes = [
       };
     },
   },
-  // 삭제 하기 API
+
+  // 삭제하는 API
   {
-    url: '/post',
+    url: '/posts',
     method: 'DELETE',
     id: 'number',
     callback: async (id) => {
       if (!id) {
         return {
           statusCode: 404,
-          body: 'NOT found',
+          body: 'Not found',
         };
       }
+
       const result = posts.find((post) => post.id === id);
 
       if (!result) {
         return {
           statusCode: 404,
-          body: 'Not Found',
+          body: 'Not found',
         };
       }
 
